@@ -1,4 +1,4 @@
-## Qt Creator template for STM32L152RBT6 Discovery board with STM32CubeMX and qbs
+## Qt Creator qbs template for STM32L152RBT6 Discovery with STM32CubeMX
 
 ![l152](https://cloud.githubusercontent.com/assets/6066470/14405181/ac848a5e-fe91-11e5-9d2d-791e734469f1.png)
 ![l152-cube](https://cloud.githubusercontent.com/assets/6066470/14405212/517421fa-fe92-11e5-92e6-faf09bb96f70.png)
