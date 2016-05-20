@@ -13,12 +13,13 @@ Project {
             "../Inc",
             "../Drivers/CMSIS/Include",
             "../Drivers/CMSIS/Device/ST/STM32L1xx/Include",
-            "../Drivers/STM32L1xx_HAL_Driver/Inc"
+            "../Drivers/STM32L1xx_StdPeriph_Driver/inc",
+            "../Drivers/STMTouch_Driver/inc"
         ]
         cpp.defines: [
-            "USE_HAL_DRIVER",
-            "STM32L152xB",
-            "ARM_MATH_CM3"
+            "USE_STDPERIPH_DRIVER",
+            "TSLPRM_STM32L1XX_SW_ACQ",
+            "STM32L1XX_MD"
         ]
         Properties {
             condition: cpp.debugInformation
@@ -27,7 +28,6 @@ Project {
 
         cpp.linkerScripts: [
             "../STM32L152RB_FLASH.ld",
-            //"../TrueSTUDIO/F1032/libs.ld",
         ]
 
         Group {
@@ -38,23 +38,20 @@ Project {
                 "Src/*.cpp",
                 "Inc/*.h"
             ]
-            excludeFiles: [
-            ]
             cpp.cxxFlags: [ "-std=c++11" ]
             cpp.cFlags: [ "-std=gnu99" ]
             cpp.warningLevel: "all"
         }
 
         Group {
-            name: "hal"
-            prefix: "../Drivers/STM32L1xx_HAL_Driver/**/"
+            name: "stdperiph"
+            prefix: "../Drivers/STM32L1xx_StdPeriph_Driver/**/"
             files: [
                 "*.c",
-                "*.cpp",
                 "*.h"
             ]
             excludeFiles: [
-                "stm32f1xx_hal_msp_template.c"
+
             ]
             cpp.cxxFlags: [ "-std=c++11" ]
             cpp.cFlags: [ "-std=gnu99" ]
@@ -65,8 +62,27 @@ Project {
             name: "cmsis"
             prefix: "../Drivers/CMSIS/Device/ST/STM32L1xx/Source/Templates/"
             files: [
-                "system_stm32l1xx.c",
-                "gcc/startup_stm32l152xb.s"
+                "TrueSTUDIO/startup_stm32l1xx_md.s"
+            ]
+            cpp.cxxFlags: [ "-std=c++11" ]
+            cpp.cFlags: [ "-std=gnu99" ]
+            cpp.warningLevel: "all"
+        }
+
+        Group {
+            name: "stmtouch"
+            prefix: "../Drivers/STMTouch_Driver/**/"
+            files: [
+                "*.c",
+                "*.h"
+            ]
+            excludeFiles: [
+                "tsl_acq_stm32l1xx_hw.h",
+                "tsl_acq_stm32l1xx_hw.c",
+                "*8l*",
+                "*8tl5x*",
+                "*32f3xx*",
+                "*f0xx*"
             ]
             cpp.cxxFlags: [ "-std=c++11" ]
             cpp.cFlags: [ "-std=gnu99" ]
